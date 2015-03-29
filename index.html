@@ -65,13 +65,15 @@
 </ul>
 
 <h3>
-<a id="repository-structure" class="anchor" href="#repository-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repository structure</h3>
+<a id="repository-contents" class="anchor" href="#repository-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repository contents</h3>
 
 <ul>
 <li>
-<a href="https://github.com/ps-md2/md2-framework"><strong>md2-framework</strong></a>: </li>
-<li><p><a href="https://github.com/ps-md2/md2-mapapps-runtime"><strong>md2-mapapps-runtime</strong></a>: </p></li>
-<li><p><a href="https://github.com/ps-md2/md2-documentation"><strong>md2-documentation</strong></a>: LaTeX project containing the user and developer documentation. Both are combined into one directory. A compiled snapshot PDF file resides at the root directory.</p></li>
+<a href="https://github.com/ps-md2/md2-framework"><strong>md2-framework</strong></a>: In the <code>mapapps</code> branch, this repository contains Eclipse projects for the development of the MD² language. Furthermore, this contains a projects for the tests (<code>de.wwu.md2.framework.tests</code>). All Eclipse projects relevant to development and testing are also Maven projects. The root Maven project that subsumes the others is <code>de.wwu.md2.framework.parent</code>.</li>
+<li>
+<a href="https://github.com/ps-md2/md2-mapapps-runtime"><strong>md2-mapapps-runtime</strong></a>: This repository contains the generic map.apps bundles that are required to run MD² map.apps apps. The bundles need to be copied into the <code>bundles/</code> folder of a map.apps installation, as described in the documentation.</li>
+<li>
+<a href="https://github.com/ps-md2/md2-documentation"><strong>md2-documentation</strong></a>: LaTeX project containing the user and developer documentation. Both are combined into one directory. A compiled snapshot PDF file resides at the root directory.</li>
 <li>
 <a href="https://github.com/ps-md2/md2-projects"><strong>md2-projects</strong></a>: This repository contains two example MD² projects. <em>CurrentStateProject</em> contains the example deficiency report use case that we have been discussing from the beginning. <em>DatingApp</em> serves as an additional use case, demonstrating further features of MD².</li>
 <li>
@@ -80,6 +82,12 @@
 
 <h3>
 <a id="continuous-integration" class="anchor" href="#continuous-integration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Continuous integration</h3>
+
+<p>Our continuous integration (CI) server is available at <a href="http://psmd2.uni-muenster.de:8080/jenkins">http://psmd2.uni-muenster.de:8080/jenkins</a> from within the university's network. There, two jobs are created that both invoke the <code>de.wwu.md2.framework.parent</code> Maven project in order to execute the tests.</p>
+
+<p>The two jobs differ in their triggering mechanism: One builds as soon as new commits are pushed to the <code>mapapps</code> branch. The other one builds for every pull request, as soon as one is created or new commits are added to an existing pull request. The pull request builder checks out a state in which the <code>mapapps</code> branch and the pull request's branch are merged. Consequently, the test result indicates whether an integration will be successful.</p>
+
+<p>Using a Cronjob, both jobs poll the GitHub repository every five minutes to detect new changes.</p>
       </section>
 
     </div>
